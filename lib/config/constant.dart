@@ -9,7 +9,7 @@ TextStyle get kDefaultTextStyle {
   //   fontStyle: FontStyle.normal,
   //   fontWeight: FontWeight.normal,
   // );
-  return GoogleFonts.nunito(
+  return GoogleFonts.roboto(
     color: kBgBlack,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.normal,

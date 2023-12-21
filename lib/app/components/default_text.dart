@@ -64,7 +64,7 @@ class DefText {
       key: key,
       maxLines: maxLine,
       textAlign: textAlign,
-      style: _style.copyWith(fontSize: 8.9),
+      style: _style.copyWith(fontSize: 8.9 - 1.7),
     );
   }
 
@@ -74,7 +74,7 @@ class DefText {
       key: key,
       maxLines: maxLine,
       textAlign: textAlign,
-      style: _style.copyWith(fontSize: 9.7),
+      style: _style.copyWith(fontSize: 9.7 - 1.7),
     );
   }
 
@@ -84,7 +84,7 @@ class DefText {
       key: key,
       maxLines: maxLine,
       textAlign: textAlign,
-      style: _style.copyWith(fontSize: 10.7),
+      style: _style.copyWith(fontSize: 10.7 - 1.7),
       overflow: maxLine != null ? TextOverflow.ellipsis : null,
     );
   }
@@ -95,7 +95,7 @@ class DefText {
       key: key,
       maxLines: maxLine,
       textAlign: textAlign,
-      style: _style.copyWith(fontSize: 11.7),
+      style: _style.copyWith(fontSize: 11.7 - 1.7),
       overflow: maxLine != null ? TextOverflow.ellipsis : null,
     );
   }
@@ -106,7 +106,7 @@ class DefText {
       key: key,
       maxLines: maxLine,
       textAlign: textAlign,
-      style: _style.copyWith(fontSize: 12.7),
+      style: _style.copyWith(fontSize: 12.7 - 1.7),
       overflow: maxLine != null ? TextOverflow.ellipsis : null,
     );
   }
@@ -117,7 +117,7 @@ class DefText {
       key: key,
       maxLines: maxLine,
       textAlign: textAlign,
-      style: _style.copyWith(fontSize: 15.7),
+      style: _style.copyWith(fontSize: 15.7 - 1.7),
       overflow: maxLine != null ? TextOverflow.ellipsis : null,
     );
   }
@@ -128,7 +128,7 @@ class DefText {
       key: key,
       maxLines: maxLine,
       textAlign: textAlign,
-      style: _style.copyWith(fontSize: 17.7),
+      style: _style.copyWith(fontSize: 17.7 - 1.7),
       overflow: maxLine != null ? TextOverflow.ellipsis : null,
     );
   }
@@ -139,7 +139,7 @@ class DefText {
       key: key,
       maxLines: maxLine,
       textAlign: textAlign,
-      style: _style.copyWith(fontSize: 22.7),
+      style: _style.copyWith(fontSize: 22.7 - 1.7),
       overflow: maxLine != null ? TextOverflow.ellipsis : null,
     );
   }
@@ -150,7 +150,7 @@ class DefText {
       key: key,
       maxLines: maxLine,
       textAlign: textAlign,
-      style: _style.copyWith(fontSize: 27.7),
+      style: _style.copyWith(fontSize: 27.7 - 1.7),
       overflow: maxLine != null ? TextOverflow.ellipsis : null,
     );
   }
@@ -161,7 +161,7 @@ class DefText {
       key: key,
       maxLines: maxLine,
       textAlign: textAlign,
-      style: _style.copyWith(fontSize: 32.7),
+      style: _style.copyWith(fontSize: 32.7 - 1.7),
       overflow: maxLine != null ? TextOverflow.ellipsis : null,
     );
   }

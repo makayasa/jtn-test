@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:jtn/app/components/default_text.dart';
 import 'package:jtn/app/modules/home/views/home_view.dart';
 import 'package:jtn/config/color_constants.dart';
+import 'package:jtn/config/constant.dart';
 
 import '../controllers/dashboard_controller.dart';
 
@@ -39,6 +40,7 @@ class DashboardView extends GetView<DashboardController> {
                 onTap: (value) {
                   controller.tabIndex.value = value;
                 },
+                dividerColor: Colors.transparent,
                 tabs: [
                   Obx(
                     () => TabItem(
@@ -73,8 +75,60 @@ class DashboardView extends GetView<DashboardController> {
             ),
           ),
         ),
+        backgroundColor: kPrimaryColor,
         body: Column(
           children: [
+            Container(
+              color: Colors.white,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topRight: Radius.circular(20),
+                    ),
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: const BoxDecoration(
+                        color: kPrimaryColor,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(10),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    color: kPrimaryColor,
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(14),
+                          bottomRight: Radius.circular(14),
+                        ),
+                      ),
+                      child: Image.asset(
+                        'assets/ButtonRefresh.png',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 40,
+                    width: 40,
+                    decoration: const BoxDecoration(
+                      color: kPrimaryColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Expanded(
               child: TabBarView(
                 controller: controller.tabController,

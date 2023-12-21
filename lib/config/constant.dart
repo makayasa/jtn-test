@@ -25,6 +25,9 @@ const kDefaultScaffoldPadding = EdgeInsets.symmetric(horizontal: 10);
 const kDefaultBorderRadius10 = BorderRadius.all(
   Radius.circular(10),
 );
+const kDefaultBorderRadius15 = BorderRadius.all(
+  Radius.circular(15),
+);
 const kDefaultBorderRadius = BorderRadius.all(
   Radius.circular(5),
 );
@@ -62,16 +65,12 @@ class MyClipper extends CustomClipper<Path> {
     // path_0.lineTo(size.width * -0.0020000, size.height * 0.0050000);
     // path_0.close();
 
-    Path path_0 = Path();
-    path_0.moveTo(size.width * 0.2012000, size.height * 0.0040000);
-    path_0.quadraticBezierTo(size.width * 0.0704000, size.height * 0.0682500, size.width * 0.1292000, size.height * 0.2470000);
-    path_0.cubicTo(
-        size.width * 0.2280000, size.height * 0.4095000, size.width * 0.1712000, size.height * 0.5905000, size.width * 0.0956000, size.height * 0.6450000);
-    path_0.cubicTo(
-        size.width * 0.0231000, size.height * 0.7162500, size.width * -0.0311000, size.height * 0.9487500, size.width * 0.0440000, size.height * 1.0020000);
-    path_0.quadraticBezierTo(size.width * 0.2830000, size.height * 1.0002500, size.width, size.height * 0.9950000);
-    path_0.lineTo(size.width, size.height * -0.0050000);
-    path_0.lineTo(size.width * 0.2012000, size.height * 0.0040000);
+     Path path_0 = Path();
+    path_0.moveTo(size.width*0.0818182,size.height*0.9090909);
+    path_0.lineTo(size.width*0.9090909,size.height*0.9090909);
+    path_0.quadraticBezierTo(size.width*0.5363636,size.height*-0.0409091,size.width,0);
+    path_0.cubicTo(size.width*0.7522727,size.height*-0.0022727,size.width*0.2568182,size.height*-0.0068182,size.width*0.0090909,size.height*-0.0090909);
+    path_0.quadraticBezierTo(size.width*0.4409091,size.height*-0.0477273,size.width*0.0818182,size.height*0.9090909);
     path_0.close();
     return path_0;
   }

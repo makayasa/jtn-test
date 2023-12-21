@@ -57,7 +57,8 @@ final kPrimaryTheme = ThemeData(
 BoxShadow kElevationShadow({Color color = Colors.grey}) {
   return BoxShadow(
     color: color,
-    offset: const Offset(0, 1),
+    offset: const Offset(2, 5),
     blurRadius: 6.0,
+    spreadRadius: -3,
   );
 }

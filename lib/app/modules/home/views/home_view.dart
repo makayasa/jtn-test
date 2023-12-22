@@ -35,24 +35,25 @@ class HomeView extends GetView<HomeController> {
           layoutBuilder: (topChild, topChildKey, bottomChild, bottomChildKey) {
             return topChild;
           },
-          secondChild: Column(
+          secondChild: const Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const SizedBox(height: 15),
-              Expanded(
-                child: Obx(
-                  () => ListView.separated(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    itemCount: controller.initData.value.data.outletSubs.length + 1,
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(height: 10);
-                    },
-                    itemBuilder: (context, index) {
-                      return OutletCard(index: index);
-                    },
-                  ),
-                ),
-              ),
+              SizedBox(height: 15),
+              OutletCard(),
+              // Expanded(
+              //   child: Obx(
+              //     () => ListView.separated(
+              //       padding: const EdgeInsets.symmetric(vertical: 10),
+              //       itemCount: controller.initData.value.data.outletSubs.length + 1,
+              //       separatorBuilder: (context, index) {
+              //         return const SizedBox(height: 10);
+              //       },
+              //       itemBuilder: (context, index) {
+              //         return OutletCard();
+              //       },
+              //     ),
+              //   ),
+              // ),
             ],
           ),
         ),

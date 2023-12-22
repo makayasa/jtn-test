@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'color_constants.dart';
 
+const kListCurrencyKey = 'kListCurrencyKey';
+
 TextStyle get kDefaultTextStyle {
   // return GoogleFonts.poppins(
   //   color: kBgBlack,
@@ -65,12 +67,13 @@ class MyClipper extends CustomClipper<Path> {
     // path_0.lineTo(size.width * -0.0020000, size.height * 0.0050000);
     // path_0.close();
 
-     Path path_0 = Path();
-    path_0.moveTo(size.width*0.0818182,size.height*0.9090909);
-    path_0.lineTo(size.width*0.9090909,size.height*0.9090909);
-    path_0.quadraticBezierTo(size.width*0.5363636,size.height*-0.0409091,size.width,0);
-    path_0.cubicTo(size.width*0.7522727,size.height*-0.0022727,size.width*0.2568182,size.height*-0.0068182,size.width*0.0090909,size.height*-0.0090909);
-    path_0.quadraticBezierTo(size.width*0.4409091,size.height*-0.0477273,size.width*0.0818182,size.height*0.9090909);
+    Path path_0 = Path();
+    path_0.moveTo(size.width * 0.0818182, size.height * 0.9090909);
+    path_0.lineTo(size.width * 0.9090909, size.height * 0.9090909);
+    path_0.quadraticBezierTo(size.width * 0.5363636, size.height * -0.0409091, size.width, 0);
+    path_0.cubicTo(
+        size.width * 0.7522727, size.height * -0.0022727, size.width * 0.2568182, size.height * -0.0068182, size.width * 0.0090909, size.height * -0.0090909);
+    path_0.quadraticBezierTo(size.width * 0.4409091, size.height * -0.0477273, size.width * 0.0818182, size.height * 0.9090909);
     path_0.close();
     return path_0;
   }

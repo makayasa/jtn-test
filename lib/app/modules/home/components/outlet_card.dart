@@ -10,9 +10,7 @@ import 'slider_outlet.dart';
 class OutletCard extends GetView<HomeController> {
   const OutletCard({
     super.key,
-    required this.index,
   });
-  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -34,18 +32,27 @@ class OutletCard extends GetView<HomeController> {
             fit: StackFit.loose,
             clipBehavior: Clip.hardEdge,
             children: [
-              OutletNameCard(index: index),
+              Obx(
+                () => AnimatedOpacity(
+                  duration: kDefaultFastDuration,
+                  curve: kDefaultCurve,
+                  // opacity: controller.listBoolSlider[index].value ? 0.5 : 1,
+                  opacity: controller.isSlideOpen.value ? 0.5 : 1,
+                  child: OutletNameCard(),
+                ),
+              ),
               Obx(
                 () => AnimatedPositioned(
                   duration: kDefaultFastDuration,
                   curve: kDefaultCurve,
                   // right: controller.positioned.value,
-                  right: !controller.listBoolSlider[index].value ? controller.constPotioned : 0,
+                  // right: !controller.listBoolSlider[index].value ? controller.constPotioned : 0,
+                  right: !controller.isSlideOpen.value ? controller.constPotioned : 0,
                   child: Align(
                     alignment: Alignment.center,
                     child: SizedBox(
                       width: Get.mediaQuery.size.width - kDefaultScaffoldPadding.horizontal - 75,
-                      child: SliderOutlet(index: index),
+                      child: SliderOutlet(),
                     ),
                   ),
                 ),

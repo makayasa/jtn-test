@@ -10,9 +10,7 @@ import 'slider_row_data.dart';
 class SliderOutlet extends GetView<HomeController> {
   const SliderOutlet({
     super.key,
-    required this.index,
   });
-  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +37,7 @@ class SliderOutlet extends GetView<HomeController> {
               // } else {
               //   controller.positioned.value = 0;
               // }
-              controller.switchSlider(index);
+              controller.switchSlider();
             },
             child: Container(
               alignment: Alignment.centerRight,
@@ -47,7 +45,8 @@ class SliderOutlet extends GetView<HomeController> {
               height: 40,
               child: Obx(
                 () => AnimatedCrossFade(
-                  crossFadeState: controller.listBoolSlider[index].value ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                  // crossFadeState: controller.listBoolSlider[index].value ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                  crossFadeState: controller.isSlideOpen.value ? CrossFadeState.showFirst : CrossFadeState.showSecond,
                   duration: kDefaultFastDuration,
                   firstChild: const Icon(
                     Icons.add_circle_outline_outlined,
@@ -62,28 +61,43 @@ class SliderOutlet extends GetView<HomeController> {
           Expanded(
             child: Column(
               children: [
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     SlideIconItem(
                       asset: 'assets/ButtonInputMasuk.png',
                       label: 'MASUK',
+                      onTap: () {
+                        controller.goToForm(1);
+                      },
                     ),
                     SlideIconItem(
                       asset: 'assets/ButtonInputKeluar.png',
                       label: 'KELUAR',
+                      onTap: () {
+                        controller.goToForm(2);
+                      },
                     ),
                     SlideIconItem(
                       asset: 'assets/ButtonInputPindah.png',
                       label: 'PINDAH',
+                      onTap: () {
+                        controller.goToForm(3);
+                      },
                     ),
-                    SlideIconItem(
+                    const SlideIconItem(
                       asset: 'assets/ButtonInputMutasi.png',
                       label: 'MUTASI',
+                      // onTap: () {
+                      //   controller.goToForm(index, 1);
+                      // },
                     ),
-                    SlideIconItem(
+                    const SlideIconItem(
                       asset: 'assets/ButtonInputKurs.png',
                       label: 'KURS',
+                      // onTap: () {
+                      //   controller.goToForm(index, 1);
+                      // },
                     ),
                   ],
                 ),

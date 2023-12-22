@@ -8,6 +8,7 @@ abstract class Routes {
   static const TRANSACTION = _Paths.TRANSACTION;
   static const REPORTS = _Paths.REPORTS;
   static const TOOLS = _Paths.TOOLS;
+  static const OUTLET_FORM = _Paths.OUTLET_FORM;
 }
 
 abstract class _Paths {
@@ -17,4 +18,5 @@ abstract class _Paths {
   static const TRANSACTION = '/transaction';
   static const REPORTS = '/reports';
   static const TOOLS = '/tools';
+  static const OUTLET_FORM = '/outlet-form';
 }

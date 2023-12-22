@@ -4,6 +4,8 @@ import '../modules/dashboard/bindings/dashboard_binding.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/outlet_form/bindings/outlet_form_binding.dart';
+import '../modules/outlet_form/views/outlet_form_view.dart';
 import '../modules/reports/bindings/reports_binding.dart';
 import '../modules/reports/views/reports_view.dart';
 import '../modules/tools/bindings/tools_binding.dart';
@@ -43,6 +45,11 @@ class AppPages {
       name: _Paths.TOOLS,
       page: () => const ToolsView(),
       binding: ToolsBinding(),
+    ),
+    GetPage(
+      name: _Paths.OUTLET_FORM,
+      page: () => const OutletFormView(),
+      binding: OutletFormBinding(),
     ),
   ];
 }

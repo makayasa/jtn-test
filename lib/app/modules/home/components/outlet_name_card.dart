@@ -9,10 +9,7 @@ import 'outlet_row.dart';
 class OutletNameCard extends GetView<HomeController> {
   const OutletNameCard({
     super.key,
-    required this.index,
   });
-
-  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +25,8 @@ class OutletNameCard extends GetView<HomeController> {
             () => DefText(
               // 'Nama Outlet',
               // controller.initData.value.data.outlet.outletName,
-              index == 0 ? controller.initData.value.data.outlet.outletName : controller.initData.value.data.outletSubs[index - 1].outletName,
+              // index == 0 ? controller.initData.value.data.outlet.outletName : controller.initData.value.data.outletSubs[index - 1].outletName,
+              controller.initData.value.data.outlet.outletName,
               color: kPrimaryColor,
               fontWeight: FontWeight.bold,
             ).semilarge,

@@ -5,21 +5,49 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "jtn",
+            "name": "launch",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "jtn (profile mode)",
+            "name": "launch (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "jtn (release mode)",
+            "name": "launch (release mode)",
+            "request": "launch",
+        "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "launch (profile mode sksl)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "flutterMode": "profile",
+            "args": [
+                "--cache-sksl",
+                "--purge-persistent-cache"
+            ]
+            //   "args": [
+            //     "-d",
+            //     "web-server",
+            //     "--web-hostname",
+            //     "192.168.100.35",
+            //     "--web-port",
+            //     "8000",
+            //     "--web-renderer html"
+            //   ]
+            // "args": [
+            //   "-d",
+            //   "chrome",
+            //   "--web-hostname",
+            //   "192.168.100.35",
+            //   "--web-port",
+            //   "8000",
+            //   "--web-renderer html"
+            // ]
         }
     ]
 }

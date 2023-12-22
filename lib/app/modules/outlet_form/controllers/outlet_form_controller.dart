@@ -70,6 +70,13 @@ class OutletFormController extends GetxController {
     logKey('a', a.length);
   }
 
+  void submitMasuk() {
+    final res = formKey.currentState!.saveAndValidate();
+    if (!res) {
+      return;
+    }
+  }
+
   @override
   void onInit() {
     super.onInit();

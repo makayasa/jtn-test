@@ -17,7 +17,7 @@ class NominalField extends GetView<OutletFormController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200,
+      // width: 200,
       margin: kDefaultScaffoldPadding,
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       decoration: const BoxDecoration(

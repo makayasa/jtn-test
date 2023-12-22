@@ -4,6 +4,7 @@ import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:jtn/config/constant.dart';
 
 void logKey([key, content]) {
   String finalLog = '';
@@ -114,4 +115,22 @@ bool isNotEmpty(dynamic val) {
     '0.00',
     '-1',
   ].contains(val.toString());
+}
+
+String dateFormater(dynamic date, {String dateFormat = kDateFormat, bool useTimezone = true}) {
+  DateTime now = DateTime.now();
+  DateTime tmpDate = DateTime.now();
+  try {
+    if (date is String) {
+      tmpDate = DateTime.parse(date);
+    } else if (date is DateTime) {
+      tmpDate = date;
+    }
+    if (useTimezone) {
+      tmpDate.add(now.timeZoneOffset);
+    }
+    return DateFormat(dateFormat, "ID").format(tmpDate);
+  } catch (e) {
+    return '';
+  }
 }

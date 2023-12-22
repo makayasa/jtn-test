@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
+import 'package:jtn/app/components/default_button.dart';
 import 'package:jtn/app/components/default_text.dart';
 import 'package:jtn/config/color_constants.dart';
 import 'package:jtn/config/constant.dart';
@@ -47,9 +48,10 @@ class OutletFormView extends GetView<OutletFormController> {
         ),
       ),
       backgroundColor: kPrimaryColor,
+      resizeToAvoidBottomInset: false,
       body: FormBuilder(
         key: controller.formKey,
-        child: ListView(
+        child: Column(
           children: [
             Container(
               constraints: const BoxConstraints(
@@ -107,6 +109,23 @@ class OutletFormView extends GetView<OutletFormController> {
                 decoration: kDefaultInputDecoration(''),
               ),
             ),
+            const SizedBox(height: 20),
+            const Spacer(),
+            Center(
+              child: DefaultButton(
+                width: 125,
+                color: kPrimaryColor2,
+                child: DefText(
+                  'Submit',
+                  textAlign: TextAlign.center,
+                  color: kPrimaryColor,
+                ).normal,
+                onTap: () {
+                  controller.submitMasuk();
+                },
+              ),
+            ),
+            const SizedBox(height: 200),
           ],
         ),
       ),

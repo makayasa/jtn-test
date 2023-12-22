@@ -17,45 +17,49 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     Get.put(HomeController());
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          controller.getTrx();
+        },
+      ),
       backgroundColor: kPrimaryColor,
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const SizedBox(height: 15),
-          Container(
-            height: 160,
-            width: double.infinity,
-            margin: kDefaultScaffoldPadding,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: kDefaultBorderRadius15,
-              boxShadow: [
-                kElevationShadow(color: Colors.black),
-              ],
-            ),
-            child: Stack(
-              fit: StackFit.loose,
-              children: [
-                OutletNameCard(),
-                Obx(
-                  () => AnimatedPositioned(
-                    // duration: kDefaultDuration,
-                    duration: kDefaultFastDuration,
-                    curve: kDefaultCurve,
-                    right: controller.positioned.value,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        width: Get.mediaQuery.size.width - kDefaultScaffoldPadding.horizontal - 75,
-                        child: Slider(),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+      body: Obx(
+        () => AnimatedCrossFade(
+          crossFadeState:
+              controller.isLoading.value && isEmpty(controller.initData.value.data.outletSubs) ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+          duration: kDefaultDuration,
+          firstCurve: kDefaultCurve,
+          firstChild: const SizedBox(
+            child: Center(
+              child: CircularProgressIndicator(
+                color: Colors.white,
+              ),
             ),
           ),
-        ],
+          layoutBuilder: (topChild, topChildKey, bottomChild, bottomChildKey) {
+            return topChild;
+          },
+          secondChild: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 15),
+              Expanded(
+                child: Obx(
+                  () => ListView.separated(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    itemCount: controller.initData.value.data.outletSubs.length + 1,
+                    separatorBuilder: (context, index) {
+                      return const SizedBox(height: 10);
+                    },
+                    itemBuilder: (context, index) {
+                      return OutletCard(index: index);
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
       // body: CustomScrollView(
       //   slivers: [
@@ -95,10 +99,64 @@ class HomeView extends GetView<HomeController> {
   }
 }
 
-class OutletNameCard extends StatelessWidget {
+class OutletCard extends GetView<HomeController> {
+  const OutletCard({
+    super.key,
+    required this.index,
+  });
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 160,
+      width: double.infinity,
+      margin: kDefaultScaffoldPadding,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: kDefaultBorderRadius15,
+        boxShadow: [
+          kElevationShadow(color: Colors.black),
+        ],
+      ),
+      child: Center(
+        child: ClipRRect(
+          borderRadius: kDefaultBorderRadius15,
+          child: Stack(
+            fit: StackFit.loose,
+            clipBehavior: Clip.hardEdge,
+            children: [
+              OutletNameCard(index: index),
+              Obx(
+                () => AnimatedPositioned(
+                  duration: kDefaultFastDuration,
+                  curve: kDefaultCurve,
+                  // right: controller.positioned.value,
+                  right: !controller.listBoolSlider[index].value ? controller.constPotioned : 0,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: SizedBox(
+                      width: Get.mediaQuery.size.width - kDefaultScaffoldPadding.horizontal - 75,
+                      child: Slider(index: index),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class OutletNameCard extends GetView<HomeController> {
   const OutletNameCard({
     super.key,
+    required this.index,
   });
+
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -110,11 +168,15 @@ class OutletNameCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          DefText(
-            'Nama Outlet',
-            color: kPrimaryColor,
-            fontWeight: FontWeight.bold,
-          ).semilarge,
+          Obx(
+            () => DefText(
+              // 'Nama Outlet',
+              // controller.initData.value.data.outlet.outletName,
+              index == 0 ? controller.initData.value.data.outlet.outletName : controller.initData.value.data.outletSubs[index - 1].outletName,
+              color: kPrimaryColor,
+              fontWeight: FontWeight.bold,
+            ).semilarge,
+          ),
           const SizedBox(height: 10),
           const OutletRow(
             currencyName: 'IDR',
@@ -144,7 +206,9 @@ class OutletNameCard extends StatelessWidget {
 class Slider extends GetView<HomeController> {
   const Slider({
     super.key,
+    required this.index,
   });
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -156,20 +220,22 @@ class Slider extends GetView<HomeController> {
         // color: kPrimaryColor2,
         borderRadius: kDefaultBorderRadius15,
         image: DecorationImage(
-            image: AssetImage(
-              'assets/TraySlide.png',
-            ),
-            fit: BoxFit.fill),
+          image: AssetImage(
+            'assets/TraySlide.png',
+          ),
+          fit: BoxFit.fill,
+        ),
       ),
       child: Row(
         children: [
           GestureDetector(
             onTap: () {
-              if (controller.positioned.value == 0) {
-                controller.positioned.value = controller.constPotioned;
-              } else {
-                controller.positioned.value = 0;
-              }
+              // if (controller.positioned.value == 0) {
+              //   controller.positioned.value = controller.constPotioned;
+              // } else {
+              //   controller.positioned.value = 0;
+              // }
+              controller.switchSlider(index);
             },
             child: Container(
               alignment: Alignment.centerRight,

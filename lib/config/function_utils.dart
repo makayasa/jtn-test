@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:developer' as dev;
 
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 
 void logKey([key, content]) {
@@ -70,4 +72,46 @@ String currencyFormat(dynamic number) {
     logKey('Error currencyFormat', e);
     return '-';
   }
+}
+
+void showToast(message, {bgColor, txtColor, ToastGravity gravity = ToastGravity.BOTTOM}) {
+  Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: gravity,
+    timeInSecForIosWeb: 1,
+    backgroundColor: bgColor,
+    // ?? kPrimaryColor,
+    textColor: txtColor ?? Colors.white,
+    fontSize: 12.0,
+  );
+}
+
+bool isEmpty(dynamic val) {
+  return [
+    "",
+    " ",
+    null,
+    'null',
+    '{}',
+    '[]',
+    '0',
+    '0.0',
+    '-1',
+  ].contains(val.toString());
+}
+
+bool isNotEmpty(dynamic val) {
+  return ![
+    "",
+    " ",
+    null,
+    'null',
+    '{}',
+    '[]',
+    '0',
+    '0.0',
+    '0.00',
+    '-1',
+  ].contains(val.toString());
 }

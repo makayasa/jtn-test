@@ -1,0 +1,170 @@
+[log
+] res initData => {
+    "status": {
+        "error": 0,
+        "login": true,
+        "user_id": "1",
+        "role": "Admin",
+        "api-ver": "0.1",
+        "dev-debug-param": "1"
+    },
+    "data": {
+        "outlet": {
+            "id": "1",
+            "outlet_name": "Induk",
+            "outlet_code": "000001",
+            "outlet_address": "Jl. Jakarta 1",
+            "outlet_phone": "0816262861",
+            "invoice_print": "1",
+            "starting_date": "2018-02-18",
+            "invoice_footer": "Terima Kasih.",
+            "date_format": "d/m/Y",
+            "time_zone": "Asia/Jakarta",
+            "currency": "Rp.",
+            "currency_show": "0",
+            "decimal_show": "0",
+            "decimal_digit": "2",
+            "decimal_zero_hide": "1",
+            "outlet_mode": "0",
+            "show_ing_code": "0",
+            "hpp_mode": "2",
+            "cek_akses_bydb": "0",
+            "collect_tax": "Yes",
+            "tax_registration_title": "NPWP",
+            "tax_registration_no": "",
+            "tax_title": "PPn",
+            "tax_use_global": "0",
+            "tax_is_gst": "No",
+            "state_code": "",
+            "pre_or_post_payment": "Post Payment",
+            "user_id": "2",
+            "parent_id": "0",
+            "order_id": "0",
+            "max_sub": "100",
+            "del_status": "Live"
+        },
+        "outlet_subs": [
+            {
+                "id": "2",
+                "outlet_name": "AQUA",
+                "parent_id": "1",
+                "order_id": "0"
+            },
+            {
+                "id": "5",
+                "outlet_name": "JTI",
+                "parent_id": "1",
+                "order_id": "0"
+            },
+            {
+                "id": "7",
+                "outlet_name": "Lion",
+                "parent_id": "1",
+                "order_id": "0"
+            },
+            {
+                "id": "8",
+                "outlet_name": "Danone",
+                "parent_id": "1",
+                "order_id": "0"
+            },
+            {
+                "id": "9",
+                "outlet_name": "Bogor",
+                "parent_id": "1",
+                "order_id": "0"
+            },
+            {
+                "id": "10",
+                "outlet_name": "Asia",
+                "parent_id": "1",
+                "order_id": "0"
+            }
+        ],
+        "trx_tipe": [
+            {
+                "id": "1",
+                "nama": "Masuk",
+                "trx": "debet",
+                "outlet_id": "1",
+                "del_status": "0"
+            },
+            {
+                "id": "2",
+                "nama": "Keluar",
+                "trx": "kredit",
+                "outlet_id": "1",
+                "del_status": "0"
+            },
+            {
+                "id": "3",
+                "nama": "Pindah",
+                "trx": "move",
+                "outlet_id": "1",
+                "del_status": "0"
+            }
+        ],
+        "pay_tipe": [
+            {
+                "byr_id": "1",
+                "byr_nama": "TUNAI",
+                "byr_desc": "",
+                "byr_qris_data": "",
+                "byr_qris_image": "",
+                "byr_http": "",
+                "outlet_id": "1",
+                "del_status": "0"
+            },
+            {
+                "byr_id": "2",
+                "byr_nama": "Bank BCA",
+                "byr_desc": "",
+                "byr_qris_data": "",
+                "byr_qris_image": "",
+                "byr_http": "",
+                "outlet_id": "1",
+                "del_status": "0"
+            },
+            {
+                "byr_id": "3",
+                "byr_nama": "Bank Mandiri",
+                "byr_desc": "",
+                "byr_qris_data": "",
+                "byr_qris_image": "",
+                "byr_http": "",
+                "outlet_id": "1",
+                "del_status": "0"
+            }
+        ],
+        "cur_tipe": [
+            {
+                "ct_id": "1",
+                "ct_nama": "IDR",
+                "ct_logo": "Rp",
+                "ct_ket": "Rupiah"
+            },
+            {
+                "ct_id": "2",
+                "ct_nama": "USD",
+                "ct_logo": "$",
+                "ct_ket": "US Dollar"
+            },
+            {
+                "ct_id": "3",
+                "ct_nama": "SGD",
+                "ct_logo": "S$",
+                "ct_ket": "Sing Dollar"
+            },
+            {
+                "ct_id": "4",
+                "ct_nama": "EUR",
+                "ct_logo": "€",
+                "ct_ket": "Euro"
+            }
+        ]
+    },
+    "debug-param-sent": {
+        "{\"act\":\"initData\",\"outlet_id\":1}": ""
+    },
+    "debug-live": ""
+}

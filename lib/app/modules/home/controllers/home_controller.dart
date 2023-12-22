@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:jtn/app/controllers/dio_controller.dart';
 import 'package:jtn/app/helpers/transaction_type_helper.dart';
 import 'package:jtn/app/models/api_init_data_mode.dart';
@@ -11,6 +12,7 @@ import 'package:dio/dio.dart' as dio;
 import '../../../../config/constant.dart';
 
 class HomeController extends GetxController {
+  final box = GetStorage();
   final dioC = Get.find<DioController>();
   final positioned = 0.0.obs;
   final isLoading = true.obs;
@@ -62,9 +64,14 @@ class HomeController extends GetxController {
     //   final data = initData.value.data.outletSubs[index];
     //   logKey('data ke form', initData.value.data.outletSubs[index].outletName);
     // }
+    final argument = {
+      'outlet': initData.value.data.outlet.toJson(),
+      'list_sub_outlet': List.from(initData.value.data.outletSubs.map((e) => e.toJson())),
+      'transaction_type': transactionTypeCode,
+    };
     Get.toNamed(
       Routes.OUTLET_FORM,
-      arguments: {},
+      arguments: argument,
     );
   }
 
@@ -88,6 +95,11 @@ class HomeController extends GetxController {
       );
       ApiInitdataModel data = ApiInitdataModel.fromJson(res.data);
       initData.value = data;
+      final currType = [];
+      for (var curr in data.data.curTipe) {
+        currType.add(curr.toJson());
+      }
+      box.write(kListCurrencyKey, currType);
 
       // //* +1 karena ditambah induk
       // for (var i = 0; i < data.data.outletSubs.length + 1; i++) {
@@ -95,7 +107,7 @@ class HomeController extends GetxController {
       //   listBoolSlider.add(isOpen);
       // }
       initData.refresh();
-      logKey('data initData', data.data.outlet.outletName);
+      // logKey('data initData', data.data.outlet.outletName);
       // logKey('res initData', res.data);
     } on dio.DioException catch (e) {
       showToast('error initData ${e.message}');

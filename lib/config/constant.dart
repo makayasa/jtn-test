@@ -1,3 +1,5 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,6 +19,25 @@ TextStyle get kDefaultTextStyle {
     fontWeight: FontWeight.normal,
   );
 }
+
+InputDecoration kDefaultInputDecoration(String hintText) {
+  return InputDecoration.collapsed(
+    floatingLabelAlignment: FloatingLabelAlignment.center,
+    hintText: hintText,
+    hintStyle: kDefaultTextStyle.copyWith(
+      color: kPrimaryColor,
+      fontWeight: FontWeight.bold,
+    ),
+  );
+}
+
+const kDropdownStyleData = DropdownStyleData(
+  offset: Offset(0.0, -20.0),
+  decoration: BoxDecoration(
+    color: Colors.white,
+    borderRadius: kDefaultBorderRadius10,
+  ),
+);
 
 const kDefaultCurve = Curves.easeInOutCirc;
 const kDefaultFastDuration = Duration(milliseconds: 250);

@@ -15,11 +15,9 @@ class SliderOutlet extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: 100,
       padding: const EdgeInsets.symmetric(vertical: 10),
       height: 160,
       decoration: const BoxDecoration(
-        // color: kPrimaryColor2,
         borderRadius: kDefaultBorderRadius15,
         image: DecorationImage(
           image: AssetImage(
@@ -32,11 +30,6 @@ class SliderOutlet extends GetView<HomeController> {
         children: [
           GestureDetector(
             onTap: () {
-              // if (controller.positioned.value == 0) {
-              //   controller.positioned.value = controller.constPotioned;
-              // } else {
-              //   controller.positioned.value = 0;
-              // }
               controller.switchSlider();
             },
             child: Container(

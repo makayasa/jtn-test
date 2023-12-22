@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 const kPrimaryColorDarker = Color(0XFF2787bd);
 const kPrimaryColor = Color(0XFF2787bd);
 const kPrimaryColor2 = Color(0xFFc1dded);
+const kPrimaryColor3 = Color(0xFFeff6fa);
 
 const kSecondaryColor = Color(0xFFD4A373);
 const kSecondaryColor2 = Color(0xFFFAEDCD);
@@ -17,6 +18,7 @@ const kBgWhite = Color(0xFFf8f8f8);
 const kBgWhite2 = Color(0XFFf2f2f2);
 const kGrey = Color(0xFF595959);
 const kInactiveColor = Color(0xFFa6a6a6);
+const kInactiveColor2 = Color(0xFFeaecf0);
 
 const kIconTheme = IconThemeData(
   color: kPrimaryColor,

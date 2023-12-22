@@ -19,6 +19,7 @@ dependencies:
   cookie_jar: ^4.0.8
   get_storage: ^2.1.1
   fluttertoast: ^8.2.4
+  # fluttertoast: ^8.1.2
 
 dev_dependencies: 
   flutter_lints: ^2.0.0

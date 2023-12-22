@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jtn/app/components/default_text.dart';
 import 'package:jtn/app/modules/home/views/home_view.dart';
+import 'package:jtn/app/modules/reports/views/reports_view.dart';
+import 'package:jtn/app/modules/tools/views/tools_view.dart';
+import 'package:jtn/app/modules/transaction/views/transaction_view.dart';
 import 'package:jtn/config/color_constants.dart';
 import 'package:jtn/config/constant.dart';
 
@@ -132,11 +135,11 @@ class DashboardView extends GetView<DashboardController> {
             Expanded(
               child: TabBarView(
                 controller: controller.tabController,
-                children: [
+                children: const [
                   HomeView(),
-                  HomeView(),
-                  HomeView(),
-                  HomeView(),
+                  TransactionView(),
+                  ReportsView(),
+                  ToolsView(),
                 ],
               ),
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:jtn/config/color_constants.dart';
 
 import '../controllers/transaction_controller.dart';
 
@@ -9,10 +10,7 @@ class TransactionView extends GetView<TransactionController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('TransactionView'),
-        centerTitle: true,
-      ),
+      backgroundColor: kPrimaryColor,
       body: const Center(
         child: Text(
           'TransactionView is working',

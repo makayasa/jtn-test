@@ -9,10 +9,6 @@ class ToolsView extends GetView<ToolsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('ToolsView'),
-        centerTitle: true,
-      ),
       body: const Center(
         child: Text(
           'ToolsView is working',

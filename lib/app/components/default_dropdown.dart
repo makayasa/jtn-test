@@ -13,11 +13,13 @@ class DefaultDropdown extends StatelessWidget {
     required this.items,
     this.hintText = '',
     this.initialValue,
+    this.isRequired = false,
   });
   final String name;
   final List<DropdownMenuItem<Object?>>? items;
   final String hintText;
   final Object? initialValue;
+  final bool isRequired;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class DefaultDropdown extends StatelessWidget {
         initialValue: initialValue,
         name: name,
         validator: FormBuilderValidators.compose([
-          FormBuilderValidators.required(),
+          if (isRequired) FormBuilderValidators.required(),
         ]),
         builder: (FormFieldState<dynamic> field) {
           return DropdownButtonHideUnderline(
@@ -42,7 +44,7 @@ class DefaultDropdown extends StatelessWidget {
               },
               value: field.value,
               validator: FormBuilderValidators.compose([
-                FormBuilderValidators.required(),
+                if (isRequired) FormBuilderValidators.required(),
               ]),
               autovalidateMode: AutovalidateMode.onUserInteraction,
               dropdownStyleData: kDropdownStyleData,

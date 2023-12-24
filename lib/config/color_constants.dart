@@ -31,6 +31,10 @@ const kBotNavTheme = BottomNavigationBarThemeData(
 );
 
 final kPrimaryTheme = ThemeData(
+  // datePickerTheme: const DatePickerThemeData(
+  //   backgroundColor: Colors.white,
+  //   color
+  // ),
   splashColor: Colors.transparent,
   highlightColor: Colors.transparent,
   primaryColor: kPrimaryColor,

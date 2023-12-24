@@ -134,6 +134,7 @@ class DashboardView extends GetView<DashboardController> {
           Expanded(
             child: TabBarView(
               controller: controller.tabController,
+              physics: const NeverScrollableScrollPhysics(),
               children: const [
                 HomeView(),
                 TransactionView(),

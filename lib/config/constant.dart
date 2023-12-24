@@ -8,6 +8,7 @@ import 'color_constants.dart';
 const kListCurrencyKey = 'kListCurrencyKey';
 
 const kDateFormat = 'dateFormat = "EEEE, dd MMMM - HH:mm';
+const kDateFormat2 = 'dateFormat = "EEEE';
 
 TextStyle get kDefaultTextStyle {
   // return GoogleFonts.poppins(

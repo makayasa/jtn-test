@@ -1,10 +1,12 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:get/get.dart';
 
 import '../../../../config/color_constants.dart';
 import '../../../../config/constant.dart';
+import '../../../../config/function_utils.dart';
 import '../../../components/default_dropdown.dart';
 import '../../../components/default_dropdown_menu_item.dart';
 import '../controllers/outlet_form_controller.dart';
@@ -33,6 +35,13 @@ class NominalField extends GetView<OutletFormController> {
               textAlign: TextAlign.right,
               decoration: kDefaultInputDecoration('0'),
               style: kDefaultTextStyle.copyWith(color: kPrimaryColor),
+              inputFormatters: [
+                CurrencyInputFormatter(),
+              ],
+              keyboardType: TextInputType.number,
+              validator: FormBuilderValidators.compose([
+                FormBuilderValidators.numeric(),
+              ]),
             ),
           ),
           const SizedBox(width: 5),
@@ -57,6 +66,7 @@ class NominalField extends GetView<OutletFormController> {
             color: kBgWhite,
             child: DefaultDropdown(
               name: 'currency',
+              isRequired: true,
               initialValue: controller.listCurrencyType.first.id,
               items: controller.listCurrencyType
                   .map(

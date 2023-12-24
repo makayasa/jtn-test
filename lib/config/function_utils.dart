@@ -2,7 +2,10 @@ import 'dart:convert';
 import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:jtn/config/constant.dart';
 
@@ -134,3 +137,63 @@ String dateFormater(dynamic date, {String dateFormat = kDateFormat, bool useTime
     return '';
   }
 }
+
+class CurrencyInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    if (newValue.selection.baseOffset == 0) {
+      return newValue;
+    }
+    // double value = double.parse(newValue.text.replaceAll(',', ''));
+    double value = double.parse(newValue.text.replaceAll('.', ''));
+
+    // final formatter = NumberFormat.decimalPattern('en_US');
+    final formatter = NumberFormat.decimalPattern('id_ID');
+
+    String newText = formatter.format(value);
+
+    return newValue.copyWith(
+      text: newText,
+      selection: TextSelection.collapsed(offset: newText.length),
+    );
+  }
+}
+
+void dialogLoading({double? size}) {
+  Get.dialog(
+    // loadingCircle(size: size),
+    SizedBox(
+      height: size,
+      width: size,
+      child: const CircularProgressIndicator(),
+    ),
+    // loading(size: size),
+    barrierDismissible: false,
+  );
+}
+
+// Future<Uint8List> compressImage(Uint8List imageData) async {
+//   const int maxFileSize = 200 * 1024; // 200KB
+//   const int quality = 80; // Set quality as needed
+
+//   // Get original image dimensions
+//   final ImageInfo imageInfo = await FlutterImageCompress.getImageInfo(imageData);
+
+//   int width = imageInfo.image.width;
+//   int height = imageInfo.image.height;
+
+//   // Determine the target dimensions to achieve the desired file size
+//   while (imageData.length > maxFileSize) {
+//     width = (width * 0.9).toInt();
+//     height = (height * 0.9).toInt();
+
+//     imageData = await FlutterImageCompress.compressWithList(
+//       imageData,
+//       minWidth: width,
+//       minHeight: height,
+//       quality: quality,
+//     );
+//   }
+
+//   return imageData;
+// }

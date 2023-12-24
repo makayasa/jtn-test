@@ -1,19 +1,17 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
 import 'package:jtn/app/components/default_button.dart';
 import 'package:jtn/app/components/default_text.dart';
+import 'package:jtn/app/helpers/transaction_type_helper.dart';
 import 'package:jtn/config/color_constants.dart';
 import 'package:jtn/config/constant.dart';
 
 import '../../../../config/function_utils.dart';
-import '../../../components/default_dropdown.dart';
-import '../../../components/default_dropdown_menu_item.dart';
 import '../components/date_field.dart';
 import '../components/nominal_field.dart';
 import '../components/outlet_name_field.dart';
+import '../components/photo_field.dart';
 import '../controllers/outlet_form_controller.dart';
 
 class OutletFormView extends GetView<OutletFormController> {
@@ -57,13 +55,34 @@ class OutletFormView extends GetView<OutletFormController> {
               constraints: const BoxConstraints(
                 minHeight: 100,
               ),
-              decoration: BoxDecoration(color: Colors.white, boxShadow: [
-                kElevationShadow(color: Colors.black.withOpacity(0.6)),
-              ]),
-              child: const Center(
-                child: SizedBox(
-                  width: 150,
-                  child: OutletNameField(),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  kElevationShadow(color: Colors.black.withOpacity(0.6)),
+                ],
+              ),
+              child: Center(
+                child: Obx(
+                  () => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      const SizedBox(
+                        width: 150,
+                        child: OutletNameField(
+                          isFrom: true,
+                          isRequired: true,
+                        ),
+                      ),
+                      if (TransactionTypeHelper.helperString(controller.transactionType.value) == TransactionTypeHelper.PINDAH)
+                        const SizedBox(
+                          width: 150,
+                          child: OutletNameField(
+                            isFrom: false,
+                            isRequired: true,
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -75,7 +94,13 @@ class OutletFormView extends GetView<OutletFormController> {
               ).normal,
             ),
             const SizedBox(height: 5),
-            const DateField(),
+            const DateField(isRequired: true),
+            Obx(
+              () => Visibility(
+                visible: TransactionTypeHelper.helperString(controller.transactionType.value) == TransactionTypeHelper.KELUAR,
+                child: const TitleField(),
+              ),
+            ),
             const SizedBox(height: 10),
             Center(
               child: DefText('Input', color: kBgWhite).normal,
@@ -124,11 +149,12 @@ class OutletFormView extends GetView<OutletFormController> {
                   color: kPrimaryColor,
                 ).normal,
                 onTap: () {
-                  controller.submitMasuk();
+                  controller.submit();
                 },
               ),
             ),
-            const SizedBox(height: 200),
+            // const SizedBox(height: 200),
+            const Spacer(),
           ],
         ),
       ),
@@ -136,130 +162,37 @@ class OutletFormView extends GetView<OutletFormController> {
   }
 }
 
-class PhotoField extends GetView<OutletFormController> {
-  const PhotoField({
+class TitleField extends StatelessWidget {
+  const TitleField({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: kDefaultScaffoldPadding,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-      decoration: const BoxDecoration(color: kBgWhite, borderRadius: kDefaultBorderRadius15),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Obx(
-            () => OutletPhoto(
-              isCurrent: true,
-              index: 1,
-              path: controller.image1Path.value,
-            ),
+    return Column(
+      children: [
+        const SizedBox(height: 10),
+        Center(
+          child: DefText(
+            'Judul',
+            color: Colors.white,
+          ).normal,
+        ),
+        const SizedBox(height: 5),
+        Container(
+          margin: kDefaultScaffoldPadding,
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: kDefaultBorderRadius15,
           ),
-          Obx(
-            () => OutletPhoto(
-              index: 2,
-              path: controller.image2Path.value,
-              isCurrent: isNotEmpty(controller.image1Path.value),
-            ),
-          ),
-          Obx(
-            () => OutletPhoto(
-              index: 3,
-              path: controller.image3Path.value,
-              isCurrent: isNotEmpty(controller.image2Path.value),
-            ),
-          ),
-          Obx(
-            () => OutletPhoto(
-              index: 4,
-              path: controller.image4Path.value,
-              isCurrent: isNotEmpty(controller.image3Path.value),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class OutletPhoto extends GetView<OutletFormController> {
-  const OutletPhoto({
-    super.key,
-    this.isEmpty = true,
-    this.isCurrent = false,
-    this.path = '',
-    required this.index,
-  });
-
-  final bool isEmpty;
-  final bool isCurrent;
-  final String path;
-  final int index;
-
-  @override
-  Widget build(BuildContext context) {
-    if (isNotEmpty(path)) {
-      return GestureDetector(
-        onLongPress: () {
-          controller.deleteImage(index);
-        },
-        child: Container(
-          height: 60,
-          width: 75,
-          decoration: BoxDecoration(
-            color: isCurrent ? kPrimaryColor2 : kPrimaryColor3,
-            borderRadius: kDefaultBorderRadius10,
-            boxShadow: [
-              kElevationShadow(),
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: kDefaultBorderRadius10,
-            child: Image.file(
-              File(path),
-              fit: BoxFit.cover,
-            ),
+          child: FormBuilderTextField(
+            name: 'title',
+            style: kDefaultTextStyle.copyWith(color: kPrimaryColor),
+            decoration: kDefaultInputDecoration(''),
           ),
         ),
-      );
-    }
-    return GestureDetector(
-      onTap: () {
-        if (isCurrent) {
-          controller.pickImage(index);
-        }
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-        height: 60,
-        width: 75,
-        decoration: BoxDecoration(
-          color: isCurrent ? kPrimaryColor2 : kPrimaryColor3,
-          borderRadius: kDefaultBorderRadius10,
-          boxShadow: [
-            kElevationShadow(),
-          ],
-        ),
-        child: Visibility(
-          visible: isCurrent,
-          child: Column(
-            children: [
-              Image.asset(
-                // File(path),
-                'assets/Union.png',
-              ),
-              const SizedBox(height: 2),
-              DefText(
-                'Tambahkan\nFoto',
-                textAlign: TextAlign.center,
-                color: kPrimaryColor,
-              ).small,
-            ],
-          ),
-        ),
-      ),
+      ],
     );
   }
 }

@@ -32,24 +32,32 @@ class OutletNameCard extends GetView<HomeController> {
             ).semilarge,
           ),
           const SizedBox(height: 10),
-          const OutletRow(
-            currencyName: 'IDR',
-            number: 500000,
+          Obx(
+            () => OutletRow(
+              currencyName: 'IDR',
+              number: controller.totalIdr.value,
+            ),
           ),
           const SizedBox(height: 10),
-          const OutletRow(
-            currencyName: 'USD',
-            number: 0,
+          Obx(
+            () => OutletRow(
+              currencyName: 'USD',
+              number: controller.totalUsd.value,
+            ),
           ),
           const SizedBox(height: 10),
-          const OutletRow(
-            currencyName: 'EUR',
-            number: 20000,
+          Obx(
+            () => OutletRow(
+              currencyName: 'EUR',
+              number: controller.totalEur.value,
+            ),
           ),
           const SizedBox(height: 10),
-          const OutletRow(
-            currencyName: 'SGD',
-            number: 6000,
+          Obx(
+            () => OutletRow(
+              currencyName: 'SGD',
+              number: controller.totalSgd.value,
+            ),
           ),
         ],
       ),

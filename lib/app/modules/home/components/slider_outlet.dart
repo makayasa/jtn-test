@@ -101,32 +101,42 @@ class SliderOutlet extends GetView<HomeController> {
                     color: Colors.white,
                     borderRadius: kDefaultBorderRadius10,
                   ),
-                  child: const Column(
+                  child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      SliderRowData(
-                        label: 'Jumlah Barang',
-                        isCurrency: false,
-                        number: 16,
+                      Obx(
+                        () => SliderRowData(
+                          label: 'Jumlah Barang',
+                          isCurrency: false,
+                          number: controller.totalItems.value,
+                        ),
                       ),
-                      SliderRowData(
-                        label: 'Total IDR',
-                        number: 100000000,
-                        currencyPrefix: 'Rp',
+                      Obx(
+                        () => SliderRowData(
+                          label: 'Total IDR',
+                          currencyPrefix: 'Rp',
+                          number: controller.totalIdr.value,
+                        ),
                       ),
-                      SliderRowData(
-                        label: 'Total USD',
-                        number: 2000,
+                      Obx(
+                        () => SliderRowData(
+                          label: 'Total USD',
+                          number: controller.totalUsd.value,
+                        ),
                       ),
-                      SliderRowData(
-                        label: 'Total EUR',
-                        currencyPrefix: '€',
-                        number: 200,
+                      Obx(
+                        () => SliderRowData(
+                          label: 'Total EUR',
+                          currencyPrefix: '€',
+                          number: controller.totalEur.value,
+                        ),
                       ),
-                      SliderRowData(
-                        label: 'Total SGD',
-                        currencyPrefix: r'S$',
-                        number: 1000,
+                      Obx(
+                        () => SliderRowData(
+                          label: 'Total SGD',
+                          currencyPrefix: r'S$',
+                          number: controller.totalSgd.value,
+                        ),
                       ),
                     ],
                   ),

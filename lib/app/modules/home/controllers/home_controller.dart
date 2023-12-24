@@ -1,9 +1,11 @@
+
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:jtn/app/controllers/dio_controller.dart';
-import 'package:jtn/app/helpers/transaction_type_helper.dart';
+import 'package:jtn/app/helpers/currency_type_helper.dart';
 import 'package:jtn/app/models/api_init_data_mode.dart';
 import 'package:jtn/app/models/api_trx_get_model.dart';
+import 'package:jtn/app/models/trx_model.dart';
 import 'package:jtn/app/routes/app_pages.dart';
 import 'package:jtn/config/environment.dart';
 import 'package:jtn/config/function_utils.dart';
@@ -21,6 +23,14 @@ class HomeController extends GetxController {
 
   final initData = ApiInitdataModel.init().obs;
 
+  final totalItems = 0.obs;
+  final totalIdr = 0.obs;
+  final totalUsd = 0.obs;
+  final totalEur = 0.obs;
+  final totalSgd = 0.obs;
+
+  final listTrx = <TrxModel>[].obs;
+
   // final listBoolSlider = <RxBool>[].obs;
 
   final isSlideOpen = false.obs;
@@ -28,6 +38,7 @@ class HomeController extends GetxController {
   void initialFunction() async {
     await login();
     await getInitData();
+    await getTrx();
     isLoading.value = false;
   }
 
@@ -45,32 +56,54 @@ class HomeController extends GetxController {
     positioned.value = 100;
   }
 
+  void refreshHome() async {
+    // dialogLoading();
+    isLoading.value = true;
+    listTrx.clear();
+    totalIdr.value = 0;
+    totalUsd.value = 0;
+    totalEur.value = 0;
+    totalSgd.value = 0;
+    await getTrx();
+    isLoading.value = false;
+    // Get.back();
+  }
+
+  void calcItems() {
+    totalItems.value = listTrx.length;
+    for (var trx in listTrx) {
+      // final currencyType = CurrencyTypeHelper.helperString(trx.currenyTipe);
+      final currencyId = CurrencyTypeHelper.helperCurrencySymbol(trx.currenyTipe);
+      if (currencyId == CurrencyTypeHelper.IDR) {
+        totalIdr.value += int.tryParse(trx.nominal) ?? 0;
+      } else if (currencyId == CurrencyTypeHelper.USD) {
+        totalUsd.value += int.tryParse(trx.nominal) ?? 0;
+      } else if (currencyId == CurrencyTypeHelper.SGD) {
+        totalSgd.value += int.tryParse(trx.nominal) ?? 0;
+      } else if (currencyId == CurrencyTypeHelper.EUR) {
+        totalEur.value += int.tryParse(trx.nominal) ?? 0;
+      }
+    }
+  }
 
   void switchSlider() {
-    // listBoolSlider[index].value = !listBoolSlider[index].value;
     isSlideOpen.value = !isSlideOpen.value;
   }
 
-  void goToForm(int transactionTypeCode) {
-    final typeTransaction = TransactionTypeHelper.helperCode(transactionTypeCode);
-    logKey('typeTransaction', typeTransaction);
-    // if (index == 0) {
-    //   logKey('ini induk');
-    // } else {
-    //   index = index - 1;
-    //   logKey('ini bukan');
-    //   final data = initData.value.data.outletSubs[index];
-    //   logKey('data ke form', initData.value.data.outletSubs[index].outletName);
-    // }
+  void goToForm(int transactionTypeCode) async {
+    // final typeTransaction = TransactionTypeHelper.helperCode(transactionTypeCode);
     final argument = {
       'outlet': initData.value.data.outlet.toJson(),
       'list_sub_outlet': List.from(initData.value.data.outletSubs.map((e) => e.toJson())),
       'transaction_type': transactionTypeCode,
     };
-    Get.toNamed(
+    final res = await Get.toNamed(
       Routes.OUTLET_FORM,
       arguments: argument,
     );
+    if (isNotEmpty(res)) {
+      await getTrx();
+    }
   }
 
   Future<void> login() async {
@@ -105,14 +138,12 @@ class HomeController extends GetxController {
       //   listBoolSlider.add(isOpen);
       // }
       initData.refresh();
-      // logKey('data initData', data.data.outlet.outletName);
-      // logKey('res initData', res.data);
     } on dio.DioException catch (e) {
       showToast('error initData ${e.message}');
     }
   }
 
-  void getTrx() async {
+  Future<void> getTrx() async {
     try {
       dio.Response res = await dioC.get(
         '$baseUrl/Trx/Get',
@@ -124,6 +155,8 @@ class HomeController extends GetxController {
         },
       );
       var data = ApiTrxGetModel.fromJson(res.data);
+      listTrx.assignAll(data.data);
+      calcItems();
       logKey('res getTrx', data.toJson());
       logKey('length', data.data.length);
     } on dio.DioException catch (e) {

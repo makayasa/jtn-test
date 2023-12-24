@@ -13,12 +13,14 @@ import 'package:jtn/app/controllers/dio_controller.dart';
 import 'package:jtn/config/constant.dart';
 import 'package:jtn/config/environment.dart';
 
+import 'color_constants.dart';
+
 void logKey([key, content]) {
+  if (!isDebug) {
+    return;
+  }
   String finalLog = '';
   dynamic tempContent = content ?? key;
-  // if (!isDev) {
-  //   return;
-  // }
   if (tempContent is Map || tempContent is List) {
     try {
       finalLog = json.encode(tempContent);
@@ -160,14 +162,35 @@ class CurrencyInputFormatter extends TextInputFormatter {
 
 void dialogLoading({double? size}) {
   Get.dialog(
-    // loadingCircle(size: size),
-    SizedBox(
-      height: size,
-      width: size,
-      child: const CircularProgressIndicator(),
-    ),
+    loadingCircle(size: size),
+    // SizedBox(
+    //   height: size,
+    //   width: size,
+    //   child: const CircularProgressIndicator(),
+    // ),
     // loading(size: size),
     barrierDismissible: false,
+  );
+}
+
+Widget loadingCircle({double? size}) {
+  return Center(
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      // crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          height: (size ?? 50) * 2,
+          width: (size ?? 50) * 2,
+          // color: kBgWhite,
+          child: const Center(
+            child: CircularProgressIndicator(
+              color: kBgBlack,
+            ),
+          ),
+        ),
+      ],
+    ),
   );
 }
 

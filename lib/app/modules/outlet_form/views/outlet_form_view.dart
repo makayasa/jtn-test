@@ -7,7 +7,6 @@ import 'package:jtn/app/helpers/transaction_type_helper.dart';
 import 'package:jtn/config/color_constants.dart';
 import 'package:jtn/config/constant.dart';
 
-import '../../../../config/function_utils.dart';
 import '../components/date_field.dart';
 import '../components/nominal_field.dart';
 import '../components/outlet_name_field.dart';
@@ -20,13 +19,6 @@ class OutletFormView extends GetView<OutletFormController> {
   Widget build(BuildContext context) {
     Get.put(OutletFormController());
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          controller.formKey.currentState!.saveAndValidate();
-          final a = controller.formKey.currentState!.value;
-          logKey('a', a);
-        },
-      ),
       appBar: AppBar(
         backgroundColor: Colors.white,
         centerTitle: true,

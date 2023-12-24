@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:jtn/app/components/default_text.dart';
+import 'package:jtn/app/modules/home/controllers/home_controller.dart';
 import 'package:jtn/app/modules/home/views/home_view.dart';
 import 'package:jtn/app/modules/reports/views/reports_view.dart';
 import 'package:jtn/app/modules/tools/views/tools_view.dart';
@@ -100,22 +101,32 @@ class DashboardView extends GetView<DashboardController> {
                     ),
                   ),
                 ),
-                Container(
-                  color: kPrimaryColor,
-                  child: Container(
-                    height: 40,
-                    width: 40,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(14),
-                        bottomRight: Radius.circular(14),
+                GetBuilder<HomeController>(
+                  init: HomeController(),
+                  builder: (homeC) {
+                    return GestureDetector(
+                      onTap: () {
+                        homeC.refreshHome();
+                      },
+                      child: Container(
+                        color: kPrimaryColor,
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(14),
+                              bottomRight: Radius.circular(14),
+                            ),
+                          ),
+                          child: Image.asset(
+                            'assets/ButtonRefresh.png',
+                          ),
+                        ),
                       ),
-                    ),
-                    child: Image.asset(
-                      'assets/ButtonRefresh.png',
-                    ),
-                  ),
+                    );
+                  },
                 ),
                 Container(
                   height: 40,

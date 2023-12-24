@@ -263,7 +263,9 @@ class OutletFormController extends GetxController {
         body: body,
       );
       logKey('res', res);
-      Get.close(2);
+      // Get.close(2);
+      Get.back();
+      Get.back(result: true);
       showToast('data submitted');
     } on dio.DioException catch (e) {
       showToast('submit error ${e.message}');
@@ -283,5 +285,4 @@ class OutletFormController extends GetxController {
     super.onReady();
     formKey.currentState!.fields['currency']!.didChange(listCurrencyType.first.id);
   }
-
 }

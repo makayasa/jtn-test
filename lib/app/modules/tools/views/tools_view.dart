@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:jtn/config/color_constants.dart';
 
 import '../controllers/tools_controller.dart';
 
@@ -9,6 +10,7 @@ class ToolsView extends GetView<ToolsController> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      backgroundColor: kPrimaryColor,
       body: Center(
         child: Text(
           'ToolsView is working',

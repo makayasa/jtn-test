@@ -4,7 +4,6 @@ import 'package:jtn/app/models/outlet_subs_models.dart';
 import 'package:jtn/app/models/pay_tipe_model.dart';
 import 'package:jtn/app/models/status_model.dart';
 import 'package:jtn/app/models/trx_tipe_model.dart';
-import 'package:jtn/config/function_utils.dart';
 
 class ApiInitdataModel {
   StatusModel status;

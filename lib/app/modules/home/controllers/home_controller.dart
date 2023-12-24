@@ -45,10 +45,6 @@ class HomeController extends GetxController {
     positioned.value = 100;
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
 
   void switchSlider() {
     // listBoolSlider[index].value = !listBoolSlider[index].value;

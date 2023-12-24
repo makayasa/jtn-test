@@ -7,7 +7,6 @@ import 'package:jtn/app/modules/reports/views/reports_view.dart';
 import 'package:jtn/app/modules/tools/views/tools_view.dart';
 import 'package:jtn/app/modules/transaction/views/transaction_view.dart';
 import 'package:jtn/config/color_constants.dart';
-import 'package:jtn/config/constant.dart';
 
 import '../controllers/dashboard_controller.dart';
 

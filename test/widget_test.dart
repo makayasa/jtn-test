@@ -14,7 +14,6 @@ import 'package:dio/dio.dart' as dio;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get/get.dart';
 import 'package:jtn/app/controllers/dio_controller.dart';
-import 'package:jtn/app/models/status_model.dart';
 import 'package:jtn/config/environment.dart';
 
 class MockGetStorage extends Mock implements GetStorage {}
@@ -58,7 +57,7 @@ void main() async {
       return;
     }
     try {
-      final url = '$baseUrl/Auth/initData';
+      const url = '$baseUrl/Auth/initData';
       dio.Response res = await c.get(
         url,
         body: {"act": "initData", "outlet_id": 1},
@@ -69,7 +68,7 @@ void main() async {
       logKey('cookies', cookies);
 
       print(res.data['status']);
-    } on dio.DioException catch (e) {}
+    } on dio.DioException {}
     // expect(false, res.isConnected);
   });
 

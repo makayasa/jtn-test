@@ -1,13 +1,17 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:flutter_background_service/flutter_background_service.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:jtn/app/controllers/dio_controller.dart';
 import 'package:jtn/config/constant.dart';
+import 'package:jtn/config/environment.dart';
 
 void logKey([key, content]) {
   String finalLog = '';
@@ -144,14 +148,9 @@ class CurrencyInputFormatter extends TextInputFormatter {
     if (newValue.selection.baseOffset == 0) {
       return newValue;
     }
-    // double value = double.parse(newValue.text.replaceAll(',', ''));
     double value = double.parse(newValue.text.replaceAll('.', ''));
-
-    // final formatter = NumberFormat.decimalPattern('en_US');
     final formatter = NumberFormat.decimalPattern('id_ID');
-
     String newText = formatter.format(value);
-
     return newValue.copyWith(
       text: newText,
       selection: TextSelection.collapsed(offset: newText.length),
@@ -172,28 +171,49 @@ void dialogLoading({double? size}) {
   );
 }
 
-// Future<Uint8List> compressImage(Uint8List imageData) async {
-//   const int maxFileSize = 200 * 1024; // 200KB
-//   const int quality = 80; // Set quality as needed
+Future<void> initializeService() async {
+  logKey();
+  final serice = FlutterBackgroundService();
 
-//   // Get original image dimensions
-//   final ImageInfo imageInfo = await FlutterImageCompress.getImageInfo(imageData);
+  const channel = AndroidNotificationChannel(
+    kNotificationChannelId,
+    'my foreground service',
+    description: 'hit api for n seccond',
+    importance: Importance.low,
+  );
 
-//   int width = imageInfo.image.width;
-//   int height = imageInfo.image.height;
+  final localNotif = FlutterLocalNotificationsPlugin();
+  await localNotif.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(
+        channel,
+      );
+  await serice.configure(
+    iosConfiguration: IosConfiguration(),
+    androidConfiguration: AndroidConfiguration(
+      onStart: onStart,
+      autoStart: true,
+      isForegroundMode: true,
+      notificationChannelId: kNotificationChannelId,
+      initialNotificationTitle: 'Awesome Service',
+      initialNotificationContent: 'initializing',
+      foregroundServiceNotificationId: notificationId,
+    ),
+  );
+  serice.startService();
+}
 
-//   // Determine the target dimensions to achieve the desired file size
-//   while (imageData.length > maxFileSize) {
-//     width = (width * 0.9).toInt();
-//     height = (height * 0.9).toInt();
-
-//     imageData = await FlutterImageCompress.compressWithList(
-//       imageData,
-//       minWidth: width,
-//       minHeight: height,
-//       quality: quality,
-//     );
-//   }
-
-//   return imageData;
-// }
+@pragma('vm:entry-point')
+void onStart(ServiceInstance service) {
+  final dioC = Get.put(DioController());
+  Timer.periodic(const Duration(seconds: 5), (timer) {
+    logKey('asd');
+    dioC.post(
+      '$baseUrl/BgService/Hit',
+      // 'http://192.168.0.2:7070/',
+      body: {
+        'nama': 'Rifqi Rahmad Ichsan Makayasa Pratama',
+        'email': 'rifqimakayasa@gmail.com',
+        'nohp': '089603853935',
+      },
+    );
+  });
+}

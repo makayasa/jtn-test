@@ -15,7 +15,11 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          controller.getTrx();
+          // controller.getTrx();
+          controller.dioC.post(
+            'http://192.168.0.2:7070/',
+            body: {'message': 'halo'},
+          );
         },
       ),
       backgroundColor: kPrimaryColor,

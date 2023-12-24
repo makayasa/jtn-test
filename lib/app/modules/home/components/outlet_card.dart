@@ -38,7 +38,7 @@ class OutletCard extends GetView<HomeController> {
                   curve: kDefaultCurve,
                   // opacity: controller.listBoolSlider[index].value ? 0.5 : 1,
                   opacity: controller.isSlideOpen.value ? 0.5 : 1,
-                  child: OutletNameCard(),
+                  child: const OutletNameCard(),
                 ),
               ),
               Obx(
@@ -52,7 +52,7 @@ class OutletCard extends GetView<HomeController> {
                     alignment: Alignment.center,
                     child: SizedBox(
                       width: Get.mediaQuery.size.width - kDefaultScaffoldPadding.horizontal - 75,
-                      child: SliderOutlet(),
+                      child: const SliderOutlet(),
                     ),
                   ),
                 ),

@@ -284,8 +284,4 @@ class OutletFormController extends GetxController {
     formKey.currentState!.fields['currency']!.didChange(listCurrencyType.first.id);
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
 }

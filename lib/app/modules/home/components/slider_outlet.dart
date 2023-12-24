@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:jtn/config/function_utils.dart';
 
 import '../../../../config/constant.dart';
 import '../controllers/home_controller.dart';

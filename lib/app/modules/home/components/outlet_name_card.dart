@@ -16,7 +16,7 @@ class OutletNameCard extends GetView<HomeController> {
     return Container(
       height: 160,
       // width: 100,
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,

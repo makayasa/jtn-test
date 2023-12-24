@@ -7,6 +7,7 @@ import 'package:intl/date_symbol_data_local.dart';
 
 import 'package:jtn/app/controllers/dio_controller.dart';
 import 'package:jtn/config/color_constants.dart';
+import 'package:jtn/config/function_utils.dart';
 
 import 'app/routes/app_pages.dart';
 
@@ -14,6 +15,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage().initStorage;
   await initializeDateFormatting();
+  initializeService();
   runApp(
     GetMaterialApp(
       title: "Application",

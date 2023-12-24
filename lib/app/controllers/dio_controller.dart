@@ -3,10 +3,9 @@ import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 
 class DioController extends GetxController {
-  dio.Dio _dio = dio.Dio();
+  final dio.Dio _dio = dio.Dio();
 
   CookieJar cookieJar = CookieJar();
 
@@ -50,7 +49,7 @@ class DioController extends GetxController {
         ),
       );
       return res;
-    } on dio.DioException catch (e) {
+    } on dio.DioException {
       rethrow;
     }
   }
@@ -78,7 +77,7 @@ class DioController extends GetxController {
         data: body,
       );
       return res;
-    } on dio.DioException catch (e) {
+    } on dio.DioException {
       rethrow;
     }
   }
@@ -90,15 +89,7 @@ class DioController extends GetxController {
     _dio.interceptors.add(CookieManager(cookieJar));
   }
 
-  @override
-  void onReady() async {
-    super.onReady();
-  }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
 
   void increment() => count.value++;
 }

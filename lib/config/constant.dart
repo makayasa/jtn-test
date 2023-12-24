@@ -23,6 +23,10 @@ TextStyle get kDefaultTextStyle {
 }
 
 InputDecoration kDefaultInputDecoration(String hintText) {
+  // return InputDecoration(
+  //   floatingLabelAlignment: FloatingLabelAlignment.center,
+  //   hintText: hintText,
+  // );
   return InputDecoration.collapsed(
     floatingLabelAlignment: FloatingLabelAlignment.center,
     hintText: hintText,

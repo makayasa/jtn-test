@@ -61,7 +61,10 @@ class OutletFormView extends GetView<OutletFormController> {
                 kElevationShadow(color: Colors.black.withOpacity(0.6)),
               ]),
               child: const Center(
-                child: OutletNameField(),
+                child: SizedBox(
+                  width: 150,
+                  child: OutletNameField(),
+                ),
               ),
             ),
             const SizedBox(height: 10),
@@ -198,28 +201,35 @@ class OutletPhoto extends GetView<OutletFormController> {
   @override
   Widget build(BuildContext context) {
     if (isNotEmpty(path)) {
-      return Container(
-        height: 60,
-        width: 75,
-        decoration: BoxDecoration(
-          color: isCurrent ? kPrimaryColor2 : kPrimaryColor3,
-          borderRadius: kDefaultBorderRadius10,
-          boxShadow: [
-            kElevationShadow(),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: kDefaultBorderRadius10,
-          child: Image.file(
-            File(path),
-            fit: BoxFit.cover,
+      return GestureDetector(
+        onLongPress: () {
+          controller.deleteImage(index);
+        },
+        child: Container(
+          height: 60,
+          width: 75,
+          decoration: BoxDecoration(
+            color: isCurrent ? kPrimaryColor2 : kPrimaryColor3,
+            borderRadius: kDefaultBorderRadius10,
+            boxShadow: [
+              kElevationShadow(),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: kDefaultBorderRadius10,
+            child: Image.file(
+              File(path),
+              fit: BoxFit.cover,
+            ),
           ),
         ),
       );
     }
     return GestureDetector(
       onTap: () {
-        controller.pickImage(index);
+        if (isCurrent) {
+          controller.pickImage(index);
+        }
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),

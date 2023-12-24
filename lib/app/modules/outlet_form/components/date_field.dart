@@ -21,7 +21,12 @@ class DateField extends StatelessWidget {
       child: Center(
         child: FormBuilderDateTimePicker(
           name: 'start_date',
+          style: kDefaultTextStyle.copyWith(
+            color: kPrimaryColor,
+            fontWeight: FontWeight.bold,
+          ),
           inputType: InputType.date,
+          textAlign: TextAlign.center,
           // format: DateFormat(kDateFormat, "ID"),
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
@@ -5,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jtn/app/helpers/transaction_type_helper.dart';
 import 'package:jtn/app/models/currency_tipe_model.dart';
+import 'package:jtn/config/color_constants.dart';
 import 'package:jtn/config/constant.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -68,6 +70,34 @@ class OutletFormController extends GetxController {
     }
     final a = await image.readAsBytes();
     logKey('a', a.length);
+  }
+
+  void deleteImage(int index) async {
+    final res = await Get.defaultDialog(
+          textConfirm: 'Delete',
+          middleText: 'Delete this image ?',
+          backgroundColor: Colors.white,
+          buttonColor: kPrimaryColor2,
+          onConfirm: () {
+            Get.back(
+              result: true,
+            );
+          },
+          onCancel: () {},
+        ) ??
+        false;
+    if (!res) {
+      return;
+    }
+    if (index == 1) {
+      image1Path.value = '';
+    } else if (index == 2) {
+      image2Path.value = '';
+    } else if (index == 3) {
+      image3Path.value = '';
+    } else if (index == 4) {
+      image4Path.value = '';
+    }
   }
 
   void submitMasuk() {

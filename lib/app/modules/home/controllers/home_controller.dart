@@ -17,7 +17,7 @@ class HomeController extends GetxController {
   final positioned = 0.0.obs;
   final isLoading = true.obs;
 
-  final double constPotioned = -(Get.mediaQuery.size.width - kDefaultScaffoldPadding.horizontal / 2) + 10 + 125;
+  final constPotioned = 0.0.obs;
 
   final initData = ApiInitdataModel.init().obs;
 
@@ -34,13 +34,15 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    positioned.value = constPotioned;
     initialFunction();
   }
 
   @override
   void onReady() {
     super.onReady();
+    constPotioned.value = -(Get.mediaQuery.size.width - kDefaultScaffoldPadding.horizontal / 2) + 10 + 125;
+    // positioned.value = constPotioned.value;
+    positioned.value = 100;
   }
 
   @override

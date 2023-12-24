@@ -45,9 +45,9 @@ class OutletCard extends GetView<HomeController> {
                 () => AnimatedPositioned(
                   duration: kDefaultFastDuration,
                   curve: kDefaultCurve,
-                  // right: controller.positioned.value,
-                  // right: !controller.listBoolSlider[index].value ? controller.constPotioned : 0,
-                  right: !controller.isSlideOpen.value ? controller.constPotioned : 0,
+                  // right: !controller.isSlideOpen.value ? controller.constPotioned.value : 0,
+                  right: !controller.isSlideOpen.value ? -(Get.mediaQuery.size.width - kDefaultScaffoldPadding.horizontal / 2) + 10 + 125 : 0,
+
                   child: Align(
                     alignment: Alignment.center,
                     child: SizedBox(
